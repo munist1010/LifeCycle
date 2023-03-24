@@ -1,31 +1,71 @@
 <script>
   export let poi = {};
   export let addLifeEvent;
+  export let deleteLifeEvent;
+  import { fade, fly } from "svelte/transition";
 
   const closeForm = (event) => {
-    event.preventDefault()
-    poi.form = !poi.form
-  }
+    if (poi.menu === "form" && !poi.name & !poi.detail) deleteLifeEvent(poi.id);
+    // this can be where it's written to firebase?
+    if (event) {
+      console.log("event");
+      event.preventDefault();
+    }
+    poi.menu = null;
+  };
 
-  // + button: add a ternery in there for whether form is open or not, if not then open up options
+  const menuToggle = () => {
+    poi.menu = "menu";
+  };
 </script>
 
 <div>
   <main>
     <h1>{poi.name}</h1>
     <p>{poi.detail}</p>
-    <button type="button" on:click={() => {addLifeEvent(poi.id, poi.form)}}>+</button>
-  </main>
-  {#if poi.form}<form
-      on:submit={() => {closeForm(event)}}
-    >
-      <label for="inputOne">Life event</label>
-      <input id="inputOne" autofucus bind:value={poi.name} type="text" required />
-      <label for="inputTwo">Tell us more</label>
-      <input id="inputTwo" bind:value={poi.detail} type="text" required />
-      <button type="submit">Add</button>
-    </form>
+    {#if poi.menu}
+      <button type="button" on:click={closeForm}>-</button>
+    {:else}
+      <button type="button" on:click={menuToggle}>+</button>
     {/if}
+  </main>
+  {#if poi.menu === "menu"}
+    <div transition:fade>
+      <button
+        type="button"
+        on:click={() => {
+          addLifeEvent(poi.id);
+        }}>Add life event</button
+      >
+      {#if poi.name !== "Birth"}
+        <button
+          type="button"
+          on:click={() => {
+            poi.menu = "form";
+          }}>Edit</button
+        >
+        <button
+          type="button"
+          on:click={() => {
+            deleteLifeEvent(poi.id);
+          }}>Delete</button
+        >
+      {/if}
+    </div>
+  {/if}
+  {#if poi.menu === "form"}
+    <form
+      on:submit={() => {
+        closeForm(event);
+      }}
+    >
+      <label for="name">Life event</label>
+      <input id="name" autofucus bind:value={poi.name} type="text" required />
+      <label for="detail">Tell us more</label>
+      <input id="detail" bind:value={poi.detail} type="text" required />
+      <button type="submit">Ok</button>
+    </form>
+  {/if}
 </div>
 
 <style>
