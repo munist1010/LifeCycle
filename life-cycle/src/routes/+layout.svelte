@@ -1,6 +1,16 @@
 <script>
 	import Header from './Header.svelte';
-	import './styles.css';
+	// import './styles.css';
+	import "../app.css"
+	import { gsap } from "gsap/dist/gsap";
+	import { Draggable } from "gsap/dist/Draggable";
+	import { onMount } from 'svelte';
+
+gsap.registerPlugin(Draggable);
+
+onMount(() => {
+	Draggable.create(".box", {type:"x,y", edgeResistance:0.65, bounds:".app", inertia:true});
+})
 </script>
 
 <div class="app">
@@ -9,6 +19,11 @@
 	<main>
 		<slot />
 	</main>
+	<section>
+		<div class="box w-10 h-10 bg-cyan-500 border-solid">
+			box
+		</div>
+	</section>
 
 	<footer>
 		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
