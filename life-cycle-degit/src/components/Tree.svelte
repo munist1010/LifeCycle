@@ -3,15 +3,21 @@
   export let tree = [];
 
   const addLifeEvent = (id, form) => {
+    tree.forEach(element => {
+      element.form = false
+    });
+    const formPosition = tree.findIndex((event) => {
+      return event.id === id;
+    });
     if (form) return;
-      const newEvent = {
-        id: tree.length,
-        name: "",
-        detail: "",
-        form: true,
-      };
-      tree.splice(id, 0, newEvent)
-      tree=tree
+    const newEvent = {
+      id: tree.length + 1,
+      name: "",
+      detail: "",
+      form: true,
+    };
+    tree.splice(formPosition + 1, 0, newEvent);
+    tree = tree;  
   };
 </script>
 
