@@ -1,11 +1,23 @@
 <script>
   import Poi from "./Poi.svelte";
   export let tree = [];
+
+  const addLifeEvent = (id, form) => {
+    if (form) return;
+      const newEvent = {
+        id: tree.length,
+        name: "",
+        detail: "",
+        form: true,
+      };
+      tree.splice(id, 0, newEvent)
+      tree=tree
+  };
 </script>
 
 <main>
   {#each tree as poi}
-    <Poi {poi} />
+    <Poi {poi} {addLifeEvent} />
   {/each}
 </main>
 

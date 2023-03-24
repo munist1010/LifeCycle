@@ -1,37 +1,30 @@
 <script>
 	import Tree from "./components/Tree.svelte";
-  let inputOne;
-  let inputTwo;
+
+  // Add button to the POI component. Button adds empty obj to array, with 'newForm' set to true
+  // The new obj appears and as newForm is true, the form appears with it
+  // fields (inputOne and Two) are bound to the obj so you type in one it appears in another
+  // 'Submit' turns newForm to false, closing the form
+
+  // POI could even be a class with methods on it?
 
   let tree = [
-    { eventName: "Birth", detail: "It all starts here" },
+    { id: 1, name: "Birth", detail: "It all starts here", form: false },
   ];
 
-  const addLifeEvent = (event) => {
-    event.preventDefault();
-    const newEvent = {
-      eventName: event.target[0].value,
-      detail: event.target[1].value,
-    };
-    tree = [...tree, newEvent];
-    inputOne = "";
-    inputTwo = "";
-  };
+  // const addLifeEvent = (event) => {
+  //   event.preventDefault();
+  //   const newEvent = {
+  //     name: event.target[0].value,
+  //     detail: event.target[1].value,
+  //     form: true
+  //   };
+  //   tree = [...tree, newEvent];
+  // };
 </script>
 
 <main>
 		<Tree {tree}/>
-  <form
-    on:submit={(event) => {
-      addLifeEvent(event);
-    }}
-  >
-    <label for="inputOne">Life event</label>
-    <input id="inputOne" bind:value={inputOne} type="text" required />
-    <label for="inputTwo">Tell us more</label>
-    <input id ="inputTwo" bind:value={inputTwo} type="text" required />
-    <button type="submit">Add</button>
-  </form>
 </main>
 
 <style>

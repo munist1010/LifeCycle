@@ -1,11 +1,32 @@
 <script>
-  export const poi = {}
+  export let poi = {};
+  export let addLifeEvent;
+
+  const closeForm = (event) => {
+    event.preventDefault()
+    poi.form = !poi.form
+  }
+
+  // + button: add a ternery in there for whether form is open or not, if not then open up options
 </script>
 
-<main>
-  <h1>{poi.eventName}</h1>
-  <p>{poi.detail}</p>
-</main>
+<div>
+  <main>
+    <h1>{poi.name}</h1>
+    <p>{poi.detail}</p>
+    <button type="button" on:click={() => {addLifeEvent(poi.id, poi.form)}}>+</button>
+  </main>
+  {#if poi.form}<form
+      on:submit={() => {closeForm(event)}}
+    >
+      <label for="inputOne">Life event</label>
+      <input id="inputOne" autofucus bind:value={poi.name} type="text" required />
+      <label for="inputTwo">Tell us more</label>
+      <input id="inputTwo" bind:value={poi.detail} type="text" required />
+      <button type="submit">Add</button>
+    </form>
+    {/if}
+</div>
 
 <style>
   h1 {
