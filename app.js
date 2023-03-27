@@ -3,6 +3,8 @@ import 'firebase/auth';
 
 // Reference to the Firebase authentication service
 const auth = firebase.auth();
+const database = firebase.database();
+
 
 // Get references to the sign-up and login forms
 const signupForm = document.querySelector('#signup-form');
