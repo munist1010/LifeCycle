@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Life Cycle</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+
+    <form id="signup-form">
+      <input type="email" id="signup-email" placeholder="Email">
+      <input type="password" id="signup-password" placeholder="Password">
+      <button type="submit">Sign up</button>
+    </form>
+
+    <form id="login-form">
+      <input type="email" id="signin-email" placeholder="Email">
+      <input type="password" id="signin-password" placeholder="Password">
+      <button type="submit">Log in</button>
+    </form>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyA-sm5nZzqWoCqempOVwqhRsMvTG49nPCY",
+          authDomain: "auth-and-database-1cee6.firebaseapp.com",
+          projectId: "auth-and-database-1cee6",
+          storageBucket: "auth-and-database-1cee6.appspot.com",
+          messagingSenderId: "777763940965",
+          appId: "1:777763940965:web:eda01bc86f2b443b1cf48c",
+          measurementId: "G-W74QJBS7M7",
+        };
+        firebase.initializeApp(firebaseConfig);
+      </script>
+    <script src="app.js"></script>
+  </body>
+
+  
+</html>
